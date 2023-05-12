@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import patch
-import weather  # assume our weather function is in weather.py
+from weather.weather import get_weather
+
 
 class TestGetWeather(unittest.TestCase):
     @patch('requests.get')
@@ -12,7 +13,7 @@ class TestGetWeather(unittest.TestCase):
             'main': {'temp': 273.15 + 22},  # 22 degrees Celsius
         }
 
-        weather_data = weather.get_weather('London')
+        weather_data = get_weather('London')
 
         self.assertEqual(weather_data['main'], 'Cloudy')
         self.assertEqual(weather_data['description'], 'cloudy with a chance of meatballs')
