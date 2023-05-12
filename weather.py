@@ -16,16 +16,14 @@ def get_weather(city):
         main = data['weather'][0]['main']
         description = data['weather'][0]['description']
         temp = int(data['main']['temp'] - 273.15)  # Convert temperature from Kelvin to Celsius
-        # concert the temp to fahrenheit
-        tempFarenheit = int((temp * 9/5) + 32)
 
-        # Get current time
-        time = datetime.datetime.now().strftime('%H:%M:%S')
-
-        print(f'Weather in {city}:')
-        print(f'{main} - {description}')
-        print(f'Temperature: {temp}°C/{tempFarenheit}°F')
-        print(f'Current time: {time}')
+        return {
+            'main': main,
+            'description': description,
+            'temp': temp,
+        }
     else:
-        print(f'Error {response.status_code}: Unable to get the weather forecast.')
-get_weather(city)
+        return None
+
+weather = get_weather(city)
+print(weather)
